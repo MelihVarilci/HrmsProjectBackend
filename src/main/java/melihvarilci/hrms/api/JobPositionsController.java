@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/jobpositions")
 public class JobPositionsController {
     private JobPositionService jobPositionService;
-// deneme yorumu
+
     @Autowired
     public JobPositionsController(JobPositionService jobPositionService) {
         this.jobPositionService = jobPositionService;
