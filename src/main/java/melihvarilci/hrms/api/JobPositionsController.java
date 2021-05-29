@@ -1,6 +1,7 @@
 package melihvarilci.hrms.api;
 
 import melihvarilci.hrms.business.abstracts.JobPositionService;
+import melihvarilci.hrms.core.utilities.results.DataResult;
 import melihvarilci.hrms.entities.concretes.JobPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class JobPositionsController {
     }
 
     @GetMapping("/getall")
-    public List<JobPosition> getAll(){
+    public DataResult<List<JobPosition>> getAll(){
         return this.jobPositionService.getAll();
     }
 }
