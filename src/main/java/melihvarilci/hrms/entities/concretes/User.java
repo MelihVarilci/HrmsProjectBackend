@@ -29,4 +29,11 @@ public class User {
 
     @Column(name = "emailVerifyCode")
     private String emailVerifyCode;
+
+    public User(String email, String password, boolean emailVerified, String emailVerifyCode) {
+        this.email = email;
+        this.password = password;
+        this.emailVerified = emailVerified;
+        this.emailVerifyCode = emailVerifyCode;
+    }
 }
