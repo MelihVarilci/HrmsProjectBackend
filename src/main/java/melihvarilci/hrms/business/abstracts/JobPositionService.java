@@ -11,5 +11,5 @@ public interface JobPositionService {
 
     DataResult<JobPosition> getByPositionName(String positionName);
 
-    Result add(JobPosition jobPosition);
+    Result addNew(JobPosition jobPosition);
 }

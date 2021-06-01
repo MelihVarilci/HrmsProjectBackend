@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "job_positions")
+@Table(name = "jobPositions")
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobPosition {
@@ -18,6 +18,6 @@ public class JobPosition {
     private int id;
 
     @Column(name = "title")
-    private String title;
+    private String positionName;
 
 }
