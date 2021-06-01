@@ -8,12 +8,16 @@ import melihvarilci.hrms.core.utilities.results.SuccessResult;
 import melihvarilci.hrms.dataAccess.abstracts.EmployeeDao;
 import melihvarilci.hrms.entities.concretes.Employee;
 import melihvarilci.hrms.entities.dtos.EmployeeForRegisterDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EmployeeManager implements EmployeeService {
     private EmployeeDao employeeDao;
 
+    @Autowired
     public EmployeeManager(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }

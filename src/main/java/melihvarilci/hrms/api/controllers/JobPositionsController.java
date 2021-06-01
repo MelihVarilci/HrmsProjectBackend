@@ -1,4 +1,4 @@
-package melihvarilci.hrms.api;
+package melihvarilci.hrms.api.controllers;
 
 import melihvarilci.hrms.business.abstracts.JobPositionService;
 import melihvarilci.hrms.core.utilities.results.DataResult;
