@@ -2,10 +2,7 @@ package melihvarilci.hrms.business.concretes;
 
 import melihvarilci.hrms.business.abstracts.UserService;
 import melihvarilci.hrms.core.utilities.mail.EmailService;
-import melihvarilci.hrms.core.utilities.results.DataResult;
-import melihvarilci.hrms.core.utilities.results.Result;
-import melihvarilci.hrms.core.utilities.results.SuccessDataResult;
-import melihvarilci.hrms.core.utilities.results.SuccessResult;
+import melihvarilci.hrms.core.utilities.results.*;
 import melihvarilci.hrms.dataAccess.abstracts.UserDao;
 import melihvarilci.hrms.entities.concretes.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +40,16 @@ public class UserManager implements UserService {
                         + "Aşşağıdaki linke tıklayarak üyeliğinizi doğrulayabilirsiniz \n "
                         + "www.localhost:8080/api/users/verify?email=" + user.getEmail() + "&verifycode=" + user.getEmailVerifyCode());
         return new SuccessResult();
+    }
+
+    @Override
+    public Result verifyUser(String email, String verificationCode) {
+        User user = this.userDao.findByEmailAndEmailVerifyCode(email, verificationCode);
+        if (user == null)
+            return new ErrorResult("Doğrulama başarısız lütfen bilgilerinizi doğru girdiğinizden emin olun.");
+
+        user.setEmailVerified(true);
+        this.userDao.save(user);
+        return new SuccessResult("Kullanıcı e-postası başarıyla doğrulandı.");
     }
 }

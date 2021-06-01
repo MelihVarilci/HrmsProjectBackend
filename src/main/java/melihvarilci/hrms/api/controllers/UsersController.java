@@ -2,9 +2,11 @@ package melihvarilci.hrms.api.controllers;
 
 import melihvarilci.hrms.business.abstracts.UserService;
 import melihvarilci.hrms.core.utilities.results.DataResult;
+import melihvarilci.hrms.core.utilities.results.Result;
 import melihvarilci.hrms.entities.concretes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,11 @@ public class UsersController {
     @GetMapping("/getall")
     public DataResult<List<User>> getAll() {
         return this.userService.getAll();
+    }
+
+    @PostMapping("/verify")
+    public Result verify(String email, String verifyCode) {
+        return this.userService.verifyUser(email, verifyCode);
     }
 
 }

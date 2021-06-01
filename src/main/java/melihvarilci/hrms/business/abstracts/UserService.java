@@ -12,4 +12,6 @@ public interface UserService {
     DataResult<User> getByEmail(String email);
 
     Result add(User user);
+
+    Result verifyUser(String email, String verificationCode);
 }
