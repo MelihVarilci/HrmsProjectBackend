@@ -44,6 +44,16 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
+    public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByCreateDate() {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueOrderByCreateDate());
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> finfByIsActiveTrueAndEmployer_Id(int employerId) {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueAndEmployer_Id(employerId));
+    }
+
+    @Override
     public Result addNew(JobAdvertisementForAddDto jobAdvertisement) {
         Result businessRules = BusinessRules.run(
                 isJobPositionValid(jobAdvertisement.getJobPositionId()),
@@ -79,6 +89,16 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         this.jobAdvertisementDao.save(jobAdvertisementToAdd);
 
         return new SuccessResult("İş ilanı başarılı bir şekilde oluşturuldu.");
+    }
+
+    @Override
+    public Result changeStatus(int jobadvertisementId, int employerId) {
+        JobAdvertisement jobAdvertisementToUpdate = this.jobAdvertisementDao.findByIdAndEmployer_Id(jobadvertisementId, employerId);
+        if (jobAdvertisementToUpdate == null)
+            return new ErrorResult("Bu kriterlere uyan bir iş ilanı bulamadı. Böyle bir iş ilanı yok veya bu iş ilanı bu şirkete ait değil");
+        jobAdvertisementToUpdate.setActive(!jobAdvertisementToUpdate.isActive());
+        this.jobAdvertisementDao.save(jobAdvertisementToUpdate);
+        return new SuccessResult("Belirtilen iş ilanı " + (jobAdvertisementToUpdate.isActive() ? "aktif" : "pasif") + " hale getirildi.");
     }
 
     private Result isJobPositionValid(int id) {

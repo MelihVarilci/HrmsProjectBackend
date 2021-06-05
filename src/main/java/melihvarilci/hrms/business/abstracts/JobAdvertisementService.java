@@ -12,5 +12,11 @@ public interface JobAdvertisementService {
 
     DataResult<List<JobAdvertisement>> findByIsActiveTrue();
 
+    DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByCreateDate();
+
+    DataResult<List<JobAdvertisement>> finfByIsActiveTrueAndEmployer_Id(int employerId);
+
     Result addNew(JobAdvertisementForAddDto jobAdvertisementForAddDto);
+
+    Result changeStatus(int jobadvertisementId, int employerId);
 }

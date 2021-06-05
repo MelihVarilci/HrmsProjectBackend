@@ -30,6 +30,21 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.findByIsActiveTrue();
     }
 
+    @GetMapping("/getallactiveorderbydate")
+    public DataResult<List<JobAdvertisement>> getAllActiveOrderDate() {
+        return this.jobAdvertisementService.findByIsActiveTrueOrderByCreateDate();
+    }
+
+    @GetMapping("/getallactivebyemployer")
+    public DataResult<List<JobAdvertisement>> getAllActiveByEmployer(int employerId) {
+        return this.jobAdvertisementService.finfByIsActiveTrueAndEmployer_Id(employerId);
+    }
+
+    @PutMapping("/changestatus")
+    public Result changeStatus(int jobadvertisementId, int employerId) {
+        return this.jobAdvertisementService.changeStatus(jobadvertisementId, employerId);
+    }
+
     @PostMapping("/add")
     public Result addNew(@RequestBody JobAdvertisementForAddDto jobAdvertisementForAddDto) {
         return this.jobAdvertisementService.addNew(jobAdvertisementForAddDto);

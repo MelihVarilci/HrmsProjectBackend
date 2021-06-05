@@ -23,7 +23,7 @@ public class Employer {
     private String companyName;
 
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
 
     @Column(name = "verified_by_system")
     private boolean verifiedBySystem;
@@ -41,7 +41,7 @@ public class Employer {
     public Employer(int id, String companyName, String phone_number, boolean verifiedBySystem, String website) {
         this.id = id;
         this.companyName = companyName;
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
         this.verifiedBySystem = verifiedBySystem;
         this.website = website;
     }
