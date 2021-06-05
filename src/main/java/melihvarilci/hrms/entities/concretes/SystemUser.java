@@ -11,15 +11,15 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "systemUsers")
+@Table(name = "system_users")
 @AllArgsConstructor
 @NoArgsConstructor
 public class SystemUser {
 
     @Id
-    @Column(name = "UserId")
+    @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "Roles")
+    @Column(name = "roles")
     private String roles;
 }

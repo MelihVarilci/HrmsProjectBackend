@@ -1,36 +1,48 @@
 package melihvarilci.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "employers")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
 public class Employer {
-
     @Id
     @Column(name = "id")
     private int id;
 
-    @Column(name = "companyName")
+    @Column(name = "company_name")
     private String companyName;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "phone_number")
+    private String phone_number;
 
-    @Column(name = "verifiedBySystem")
+    @Column(name = "verified_by_system")
     private boolean verifiedBySystem;
 
     @Column(name = "website")
     private String website;
 
+    @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
+    private List<JobAdvertisement> jobAdvertisements;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private User user;
+
+    public Employer(int id, String companyName, String phone_number, boolean verifiedBySystem, String website) {
+        this.id = id;
+        this.companyName = companyName;
+        this.phone_number = phone_number;
+        this.verifiedBySystem = verifiedBySystem;
+        this.website = website;
+    }
 }

@@ -31,6 +31,14 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
+    public DataResult<Employer> getById(int id) {
+        Employer employer = this.employerDao.getById(id);
+        if (employer == null)
+            return new ErrorDataResult<Employer>();
+        return new SuccessDataResult<Employer>(employer);
+    }
+
+    @Override
     public Result register(EmployerForRegisterDto employer) {
         Result businessRules = BusinessRules.run(
                 isPasswordsSame(employer.getPassword(), employer.getVerifyPassword()),
@@ -48,6 +56,14 @@ public class EmployerManager implements EmployerService {
         return new SuccessResult("İş veren başarıyla kayıt oldu. Lütfen e-posta adresinize gönderilen linke tıklayarak üyeliğinizi doğrulayın.");
     }
 
+    @Override
+    public Boolean existById(int id) {
+        boolean employer = this.employerDao.existsById(id);
+        if (!employer)
+            return false;
+        return true;
+    }
+
     private Result isPasswordsSame(String password, String passwordConfirm) {
         if (!password.equals(passwordConfirm)) return new ErrorResult("Şifreniz uyuşmuyor.");
         return new SuccessResult();
@@ -55,7 +71,7 @@ public class EmployerManager implements EmployerService {
 
     private Result isEmailandWebsiteDomainSame(String email, String website) {
         String[] emailSplit = email.split("@");
-        if (!emailSplit[1].equals(website))
+        if (!website.contains(emailSplit[1]))
             return new ErrorResult("E-posta adresinizin domaini web siteniz ile aynı olmalıdır.");
         return new SuccessResult();
     }

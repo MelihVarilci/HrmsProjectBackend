@@ -11,5 +11,9 @@ import java.util.List;
 public interface EmployerService {
     DataResult<List<Employer>> getAll();
 
+    DataResult<Employer> getById(int id);
+
     Result register(EmployerForRegisterDto employer);
+
+    Boolean existById(int id);
 }

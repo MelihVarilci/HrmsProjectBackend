@@ -12,7 +12,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -24,10 +23,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "emailVerified")
+    @Column(name = "email_verified")
     private boolean emailVerified;
 
-    @Column(name = "emailVerifyCode")
+    @Column(name = "email_verify_code")
     private String emailVerifyCode;
 
     public User(String email, String password, boolean emailVerified, String emailVerifyCode) {

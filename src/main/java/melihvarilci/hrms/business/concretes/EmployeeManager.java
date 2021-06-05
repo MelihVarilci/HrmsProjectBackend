@@ -71,7 +71,8 @@ public class EmployeeManager implements EmployeeService {
     }
 
     private Result isPasswordsMatch(String password, String passwordConfirm) {
-        if (!password.equals(passwordConfirm)) return new ErrorResult("Şifreler uyuşmalıdır.");
+        if (!password.equals(passwordConfirm))
+            return new ErrorResult("Şifreler uyuşmalıdır.");
         return new SuccessResult();
     }
 

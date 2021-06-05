@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CityService {
     DataResult<List<City>> getAll();
+
+    DataResult<City> getById(int id);
 }

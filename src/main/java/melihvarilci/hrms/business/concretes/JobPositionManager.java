@@ -29,10 +29,18 @@ public class JobPositionManager implements JobPositionService {
     }
 
     @Override
+    public DataResult<JobPosition> getById(int id) {
+        JobPosition jobPosition = this.jobPositionDao.getById(id);
+        if (jobPosition == null)
+            return new ErrorDataResult<JobPosition>();
+        return new SuccessDataResult<JobPosition>(jobPosition);
+    }
+
+    @Override
     public Result addNew(JobPosition jobPosition) {
         if (jobPosition.getPositionName() == null || jobPosition.getPositionName() == "")
             return new ErrorResult("İş pozisyon ismi boş bırakılamaz.");
-        if (getByPositionName(jobPosition.getPositionName()) != null)
+        if (getByPositionName(jobPosition.getPositionName()).getData() != null)
             return new ErrorResult("Aynı isimde iki adet iş pozisyonu oluşturulamaz.");
         this.jobPositionDao.save(jobPosition);
         return new SuccessResult("İş pozisyonu başarıyla eklendi.");

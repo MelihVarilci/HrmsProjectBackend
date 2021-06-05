@@ -20,8 +20,13 @@ public class CitiesController {
         this.cityService = cityService;
     }
 
-    @GetMapping(name = "/getall")
+    @GetMapping("/getall")
     public DataResult<List<City>> getAll() {
         return this.cityService.getAll();
+    }
+
+    @GetMapping("/getbyid")
+    public DataResult<City> getById(int id) {
+        return this.cityService.getById(id);
     }
 }
