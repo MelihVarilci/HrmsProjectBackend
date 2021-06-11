@@ -18,25 +18,25 @@ public class JobAdvertisement {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "job_description")
+    @Column(name = "job_description", nullable = false)
     private String jobDescription;
 
-    @Column(name = "min_salary")
+    @Column(name = "min_salary", nullable = true)
     private Double minSalary;
 
-    @Column(name = "max_salary")
+    @Column(name = "max_salary", nullable = true)
     private Double maxSalary;
 
-    @Column(name = "open_position_count")
+    @Column(name = "open_position_count", nullable = false)
     private int openPositionCount;
 
-    @Column(name = "last_apply_date")
+    @Column(name = "last_apply_date", nullable = false)
     private Date lastApplyDate;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false)
     private Date createDate;
 
-    @Column(name = "is_active")
+    @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})

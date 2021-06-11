@@ -33,7 +33,7 @@ public class EmployerManager implements EmployerService {
     @Override
     public DataResult<Employer> getById(int id) {
         Employer employer = this.employerDao.getById(id);
-        if (employer == null)
+        if (employer == null || !this.employerDao.existsById(id))
             return new ErrorDataResult<Employer>();
         return new SuccessDataResult<Employer>(employer);
     }
@@ -71,8 +71,12 @@ public class EmployerManager implements EmployerService {
 
     private Result isEmailandWebsiteDomainSame(String email, String website) {
         String[] emailSplit = email.split("@");
+        if (emailSplit.length < 2)
+            return new ErrorResult("E-posta adresinizi düzgün fortmatta giriniz.");
+
         if (!website.contains(emailSplit[1]))
             return new ErrorResult("E-posta adresinizin domaini web siteniz ile aynı olmalıdır.");
+
         return new SuccessResult();
     }
 

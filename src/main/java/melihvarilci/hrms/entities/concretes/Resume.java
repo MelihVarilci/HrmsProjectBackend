@@ -1,0 +1,65 @@
+package melihvarilci.hrms.entities.concretes;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
+
+@Data
+@Entity
+@Table(name = "resumes")
+@AllArgsConstructor
+@NoArgsConstructor
+public class Resume {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "github_address", nullable = true)
+    private String githubAddress;
+
+    @Column(name = "linkedin_address", nullable = true)
+    private String linkedinAddress;
+
+    @Column(name = "cover_letter", nullable = true)
+    private String coverLetter;
+
+    @Column(name = "picture", nullable = true)
+    private String picture;
+
+    @Column(name = "create_date", nullable = false)
+    private LocalDate createDate;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    @JsonIgnore
+    private Employee employee;
+
+    @OneToMany(mappedBy = "resume")
+    @JsonIgnore
+    private Set<JobExperience> jobExperiences;
+
+    @OneToMany(mappedBy = "resume")
+    @JsonIgnore
+    Set<ResumeForeignLanguage> resumeForeignLanguages;
+
+    @OneToMany(mappedBy = "resume")
+    @JsonIgnore
+    Set<ResumeSkill> resumeSkills;
+
+    public Resume(String githubAddress, String linkedinAddress, String coverLetter, String picture, LocalDate createDate,
+                  Employee employee) {
+        this.githubAddress = githubAddress;
+        this.linkedinAddress = linkedinAddress;
+        this.coverLetter = coverLetter;
+        this.picture = picture;
+        this.createDate = createDate;
+        this.employee = employee;
+    }
+}

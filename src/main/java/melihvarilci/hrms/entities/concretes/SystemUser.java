@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SystemUser {
-
     @Id
     @Column(name = "user_id")
     private int userId;

@@ -1,28 +1,30 @@
 package melihvarilci.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "cities")
+@Table(name = "foreign_languages")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
-public class City {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "resumeForeignLanguages"})
+public class ForeignLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private int id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-    private List<JobAdvertisement> jobAdvertisements;
+    @OneToMany(mappedBy = "foreignLanguage")
+    @JsonIgnore
+    Set<ResumeForeignLanguage> resumeForeignLanguages;
 }

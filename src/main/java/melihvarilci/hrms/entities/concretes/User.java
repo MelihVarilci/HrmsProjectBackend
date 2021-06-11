@@ -17,16 +17,16 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email_verified")
+    @Column(name = "email_verified", nullable = false)
     private boolean emailVerified;
 
-    @Column(name = "email_verify_code")
+    @Column(name = "email_verify_code", nullable = false)
     private String emailVerifyCode;
 
     public User(String email, String password, boolean emailVerified, String emailVerifyCode) {

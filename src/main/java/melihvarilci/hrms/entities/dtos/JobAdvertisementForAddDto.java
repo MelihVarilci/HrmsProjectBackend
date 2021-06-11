@@ -15,7 +15,6 @@ public class JobAdvertisementForAddDto {
     private Double maxSalary;
     private int openPositionCount;
     private Date lastApplyDate;
-    private Date createDate;
     private boolean isActive;
     private int cityId;
     private int jobPositionId;

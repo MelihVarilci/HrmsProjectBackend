@@ -22,15 +22,13 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     private JobPositionService jobPositionService;
     private CityService cityService;
     private EmployerService employerService;
-    private EmployerDao employerDao;
 
     @Autowired
-    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, JobPositionService jobPositionService, CityService cityService, EmployerService employerService, EmployerDao employerDao) {
+    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, JobPositionService jobPositionService, CityService cityService, EmployerService employerService) {
         this.jobAdvertisementDao = jobAdvertisementDao;
         this.jobPositionService = jobPositionService;
         this.cityService = cityService;
         this.employerService = employerService;
-        this.employerDao = employerDao;
     }
 
     @Override
@@ -68,7 +66,6 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         // Authentication implement
 //        if (this.employerService.getById(jobAdvertisement.getEmployerId()).getData() == null)
 //        if (!employerService.getById(jobAdvertisement.getEmployerId()).getSuccess())
-//        if (!this.employerDao.existsById(jobAdvertisement.getEmployerId())) //DAO üzerinden yapmak mı daha doğru olur?
         if (!this.employerService.existById(jobAdvertisement.getEmployerId()))
             return new ErrorResult("Böyle bir iş veren firma yok.");
 

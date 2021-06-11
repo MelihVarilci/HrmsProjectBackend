@@ -6,32 +6,22 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployerForRegisterDto {
+public class JobExperienceForAddDto {
     @NotNull
     @NotBlank
-    private String companyName;
+    private String officeName;
 
     @NotNull
     @NotBlank
-    private String website;
+    private String position;
 
     @NotNull
-    @NotBlank
-    private String email;
+    private Date startDate;
 
-    @NotNull
-    @NotBlank
-    private String phone;
-
-    @NotNull
-    @NotBlank
-    private String password;
-
-    @NotNull
-    @NotBlank
-    private String verifyPassword;
+    private Date endDate;
 }
