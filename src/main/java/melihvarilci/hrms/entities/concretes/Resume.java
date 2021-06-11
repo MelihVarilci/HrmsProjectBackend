@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -34,7 +33,7 @@ public class Resume {
     private String picture;
 
     @Column(name = "create_date", nullable = false)
-    private LocalDate createDate;
+    private Date createDate;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -53,13 +52,13 @@ public class Resume {
     @JsonIgnore
     Set<ResumeSkill> resumeSkills;
 
-    public Resume(String githubAddress, String linkedinAddress, String coverLetter, String picture, LocalDate createDate,
+    public Resume(String githubAddress, String linkedinAddress, String coverLetter, String picture,
                   Employee employee) {
         this.githubAddress = githubAddress;
         this.linkedinAddress = linkedinAddress;
         this.coverLetter = coverLetter;
         this.picture = picture;
-        this.createDate = createDate;
+        this.createDate = new Date();
         this.employee = employee;
     }
 }

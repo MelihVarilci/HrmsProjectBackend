@@ -70,6 +70,14 @@ public class EmployeeManager implements EmployeeService {
         return new SuccessResult("İş arayan kayıdı başarılı. Lütfen e-posta adresinize gönderilen doğrulama linkiyle hesabınızı doğrulayınız.");
     }
 
+    @Override
+    public DataResult<Employee> getById(int id) {
+        Employee employee = this.employeeDao.getById(id);
+        if (employee == null)
+            return new ErrorDataResult<Employee>();
+        return new SuccessDataResult<Employee>(employee);
+    }
+
     private Result isPasswordsMatch(String password, String passwordConfirm) {
         if (!password.equals(passwordConfirm))
             return new ErrorResult("Şifreler uyuşmalıdır.");

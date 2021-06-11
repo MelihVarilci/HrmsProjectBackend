@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -27,17 +26,17 @@ public class JobExperience {
     private String position;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private Date startDate;
 
     @Column(name = "end_date", nullable = true)
-    private LocalDate endDate;
+    private Date endDate;
 
     @ManyToOne
     @JoinColumn(name = "resume_id")
     @JsonIgnore
     private Resume resume;
 
-    public JobExperience(String officeName, String position, LocalDate startDate, LocalDate endDate, Resume resume) {
+    public JobExperience(String officeName, String position, Date startDate, Date endDate, Resume resume) {
         this.officeName = officeName;
         this.position = position;
         this.startDate = startDate;

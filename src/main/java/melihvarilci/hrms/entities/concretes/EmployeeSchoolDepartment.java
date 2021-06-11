@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -19,10 +18,10 @@ public class EmployeeSchoolDepartment {
     private int id;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private Date startDate;
 
     @Column(name = "graduate_date")
-    private LocalDate graduateDate;
+    private Date graduateDate;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -32,8 +31,7 @@ public class EmployeeSchoolDepartment {
     @JoinColumn(name = "school_department_id")
     private SchoolDepartment schoolDepartment;
 
-    public EmployeeSchoolDepartment(Employee employee, SchoolDepartment schoolDepartment, LocalDate startDate,
-                                    LocalDate graduateDate) {
+    public EmployeeSchoolDepartment(Employee employee, SchoolDepartment schoolDepartment, Date startDate, Date graduateDate) {
         this.employee = employee;
         this.schoolDepartment = schoolDepartment;
         this.startDate = startDate;
