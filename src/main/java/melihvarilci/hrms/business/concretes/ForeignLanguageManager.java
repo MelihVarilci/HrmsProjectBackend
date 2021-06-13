@@ -28,6 +28,6 @@ public class ForeignLanguageManager implements ForeignLanguageService {
 
     @Override
     public DataResult<ForeignLanguage> findById(int id) {
-        return new SuccessDataResult<ForeignLanguage>(this.foreignLanguageDao.getById(id));
+        return new SuccessDataResult<ForeignLanguage>(this.foreignLanguageDao.findById(id));
     }
 }

@@ -28,7 +28,7 @@ public class SkillManager implements SkillService {
 
     @Override
     public DataResult<Skill> findById(int id) {
-        Skill skill = this.skillDao.getById(id);
+        Skill skill = this.skillDao.findById(id);
         if (skill == null)
             return new ErrorDataResult<Skill>();
         return new SuccessDataResult<Skill>(skill);

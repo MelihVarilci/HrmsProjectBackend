@@ -10,4 +10,6 @@ import java.util.List;
 public interface ForeignLanguageDao extends JpaRepository<ForeignLanguage, Integer> {
     @Query("Select new melihvarilci.hrms.entities.dtos.ForeignLanguageDetailsDto(fl.name, rfl.ratio) From ForeignLanguage fl Join fl.resumeForeignLanguages rfl Where rfl.resume.id = :id")
     List<ForeignLanguageDetailsDto> findByResume_ResumeId(int id);
+
+    ForeignLanguage findById(int id);
 }

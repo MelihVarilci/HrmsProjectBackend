@@ -32,8 +32,8 @@ public class EmployerManager implements EmployerService {
 
     @Override
     public DataResult<Employer> getById(int id) {
-        Employer employer = this.employerDao.getById(id);
-        if (employer == null || !this.employerDao.existsById(id))
+        Employer employer = this.employerDao.findById(id);
+        if (employer == null)
             return new ErrorDataResult<Employer>();
         return new SuccessDataResult<Employer>(employer);
     }

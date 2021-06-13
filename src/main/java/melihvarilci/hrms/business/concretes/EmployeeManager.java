@@ -72,7 +72,7 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public DataResult<Employee> getById(int id) {
-        Employee employee = this.employeeDao.getById(id);
+        Employee employee = this.employeeDao.findById(id);
         if (employee == null)
             return new ErrorDataResult<Employee>();
         return new SuccessDataResult<Employee>(employee);

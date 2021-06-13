@@ -10,4 +10,6 @@ import java.util.List;
 public interface SkillDao extends JpaRepository<Skill, Integer> {
     @Query("Select new melihvarilci.hrms.entities.dtos.SkillDetailsDto (s.name, rs.level) From Skill s Join s.resumeSkills rs Where rs.resume.id =: id")
     List<SkillDetailsDto> findByResume_ResumeId(int id);
+
+    Skill findById(int id);
 }
