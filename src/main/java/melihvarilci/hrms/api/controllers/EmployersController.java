@@ -4,6 +4,7 @@ import melihvarilci.hrms.business.abstracts.EmployerService;
 import melihvarilci.hrms.core.utilities.results.DataResult;
 import melihvarilci.hrms.core.utilities.results.ErrorDataResult;
 import melihvarilci.hrms.entities.concretes.Employer;
+import melihvarilci.hrms.entities.dtos.EmployerForLoginDto;
 import melihvarilci.hrms.entities.dtos.EmployerForRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,11 @@ public class EmployersController {
     @PostMapping("/register")
     public ResponseEntity<?> add(@Valid @RequestBody EmployerForRegisterDto employer) {
         return ResponseEntity.ok(this.employerService.register(employer));
+    }
+
+    @PostMapping("/login")
+    private ResponseEntity<?> login(@Valid @RequestBody EmployerForLoginDto employer) {
+        return ResponseEntity.ok(this.employerService.login(employer));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

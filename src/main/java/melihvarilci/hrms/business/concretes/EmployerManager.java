@@ -7,6 +7,7 @@ import melihvarilci.hrms.core.utilities.results.*;
 import melihvarilci.hrms.dataAccess.abstracts.EmployerDao;
 import melihvarilci.hrms.entities.concretes.Employer;
 import melihvarilci.hrms.entities.concretes.User;
+import melihvarilci.hrms.entities.dtos.EmployerForLoginDto;
 import melihvarilci.hrms.entities.dtos.EmployerForRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,19 @@ public class EmployerManager implements EmployerService {
         if (employer == null)
             return new ErrorDataResult<Employer>();
         return new SuccessDataResult<Employer>(employer);
+    }
+
+    @Override
+    public DataResult<Employer> login(EmployerForLoginDto employer) {
+        Employer employerToLogin = this.employerDao.getByPhoneNumberAndUser_Password(employer.getPhone(), employer.getPassword());
+        if (employerToLogin == null)
+            return new ErrorDataResult<Employer>("Giriş bilgileriniz hatalı. Lütfen kontrol ediniz.");
+
+        Result businessRulesResult = BusinessRules.run(
+                isEmployerVerified(employerToLogin));
+        if (businessRulesResult != null) return new ErrorDataResult<Employer>(businessRulesResult.getMessage());
+
+        return new SuccessDataResult<Employer>(employerToLogin, "Giriş başarılı");
     }
 
     @Override
@@ -86,4 +100,8 @@ public class EmployerManager implements EmployerService {
         return new SuccessResult();
     }
 
+    private Result isEmployerVerified(Employer employer) {
+        if (employer.isVerifiedBySystem()) return new SuccessResult();
+        return new ErrorResult("Üyeliğiniz henüz aktifleştirilmemiştir. Lütfen ekiplerimizin üyeliğinizi aktifleştirmesini bekleyin.");
+    }
 }
