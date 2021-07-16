@@ -8,6 +8,7 @@ import melihvarilci.hrms.core.utilities.results.*;
 import melihvarilci.hrms.dataAccess.abstracts.EmployeeDao;
 import melihvarilci.hrms.entities.concretes.Employee;
 import melihvarilci.hrms.entities.concretes.User;
+import melihvarilci.hrms.entities.dtos.EmployeeForLoginDto;
 import melihvarilci.hrms.entities.dtos.EmployeeForRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,6 +79,21 @@ public class EmployeeManager implements EmployeeService {
         return new SuccessDataResult<Employee>(employee);
     }
 
+    @Override
+    public DataResult<Employee> login(EmployeeForLoginDto employee) {
+        Employee employeeToLogin = this.employeeDao.findByUser_EmailAndUser_Password(employee.getEmail(), employee.getPassword());
+
+        if (employeeToLogin == null)
+            return new ErrorDataResult<Employee>("Giriş bilgileri hatalı veya eksik. Lütfen kontrol ediniz.");
+
+        Result businessRules = BusinessRules.run(
+                isEmployeeEmailVerified(employeeToLogin)
+        );
+        if (businessRules != null) return new ErrorDataResult<Employee>(businessRules.getMessage());
+
+        return new SuccessDataResult<Employee>(businessRules.getMessage());
+    }
+
     private Result isPasswordsMatch(String password, String passwordConfirm) {
         if (!password.equals(passwordConfirm))
             return new ErrorResult("Şifreler uyuşmalıdır.");
@@ -93,6 +109,12 @@ public class EmployeeManager implements EmployeeService {
     private Result isUserExistWithNationalityId(String nationalityId) {
         if (this.employeeDao.findByNationalityId(nationalityId) != null)
             return new ErrorResult("Bu TCKN ile başka bir kullanıcı mevcut.");
+        return new SuccessResult();
+    }
+
+    private Result isEmployeeEmailVerified(Employee employee) {
+        if (!employee.getUser().isEmailVerified())
+            return new ErrorResult("E-posta adresinizi doğrulamadan sisteme giriş yapamazsınız.");
         return new SuccessResult();
     }
 }

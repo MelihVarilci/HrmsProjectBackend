@@ -4,13 +4,16 @@ import melihvarilci.hrms.business.abstracts.JobPositionService;
 import melihvarilci.hrms.core.utilities.results.DataResult;
 import melihvarilci.hrms.core.utilities.results.Result;
 import melihvarilci.hrms.entities.concretes.JobPosition;
+import melihvarilci.hrms.entities.dtos.JobPositionForListingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobpositions")
+@CrossOrigin
 public class JobPositionsController {
     private JobPositionService jobPositionService;
 
@@ -22,6 +25,11 @@ public class JobPositionsController {
     @GetMapping("/getall")
     public DataResult<List<JobPosition>> getAll() {
         return this.jobPositionService.getAll();
+    }
+
+    @GetMapping("/getallwithjobadcount")
+    public DataResult<List<JobPositionForListingDto>> getAllWithJobAdCount() {
+        return this.jobPositionService.getAllWithJobAdCount();
     }
 
     @GetMapping("/getbyname")
