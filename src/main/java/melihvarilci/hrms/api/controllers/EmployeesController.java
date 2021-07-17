@@ -47,11 +47,11 @@ public class EmployeesController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exception) {
-        Map<String, String> valiadationErrors = new HashMap<String, String>();
+        Map<String, String> validationErrors = new HashMap<String, String>();
         for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
-            valiadationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(valiadationErrors, "Doğrulama hatası.");
+        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors, "Doğrulama hataları.");
         return errors;
     }
 }

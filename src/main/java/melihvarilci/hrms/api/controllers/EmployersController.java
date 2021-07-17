@@ -51,7 +51,7 @@ public class EmployersController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDataResult<Object> handleValidationExeption(MethodArgumentNotValidException exception) {
+    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exception) {
         Map<String, String> validationErrors = new HashMap<String, String>();
         for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
             validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
