@@ -22,6 +22,6 @@ public class EmployeeJobAdvertisementFavorite {
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "jobadvertisement_id")
+    @JoinColumn(name = "job_advertisement_id")
     private JobAdvertisement jobAdvertisement;
 }
