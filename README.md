@@ -2,4 +2,4 @@
 
 - PostgreSQL veri tabanı modellemesi.
 
-><img src="images/HrmsDatabaseDiagram.png">
+><img src="images/HrmsDatabaseDiagram-Last.png">
