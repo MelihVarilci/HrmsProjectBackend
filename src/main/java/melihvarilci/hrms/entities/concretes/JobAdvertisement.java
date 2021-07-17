@@ -1,11 +1,13 @@
 package melihvarilci.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -61,6 +63,10 @@ public class JobAdvertisement {
     @ManyToOne()
     @JoinColumn(name = "workingtime_id")
     private JobAdvertisementWorkingTime workingTime;
+
+    @OneToMany(mappedBy = "jobAdvertisement")
+    @JsonIgnore()
+    Set<EmployeeJobAdvertisementFavorite> employeeJobAdvertisementFavorites;
 
     public JobAdvertisement(String jobDescription, Double minSalary, Double maxSalary, int openPositionCount,
                             Date lastApplyDate, Date createDate, boolean isActive) {

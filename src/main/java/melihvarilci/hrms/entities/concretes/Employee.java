@@ -32,7 +32,7 @@ public class Employee {
     private Date birthOfDate;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "employee")

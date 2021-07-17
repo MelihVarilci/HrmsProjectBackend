@@ -64,6 +64,11 @@ public class ResumeManager implements ResumeService {
     }
 
     @Override
+    public DataResult<List<Resume>> getAllByEmployeeId(int id) {
+        return new SuccessDataResult<List<Resume>>(this.resumeDao.getAllByEmployee_user_id(id));
+    }
+
+    @Override
     public Result add(ResumeForAddDto resume) {
         // Bu kısım sonradan doldurulacak
         Result businessRulesResult = BusinessRules.run();

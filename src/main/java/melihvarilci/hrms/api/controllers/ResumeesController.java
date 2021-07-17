@@ -39,12 +39,17 @@ public class ResumeesController {
         return this.resumeService.getAll();
     }
 
+    @GetMapping("/getallbyemployeeid")
+    public DataResult<List<Resume>> getAllByEmployeeId(int id) {
+        return this.resumeService.getAllByEmployeeId(id);
+    }
+
     @GetMapping("/getDetailById")
     public DataResult<ResumeWithDetailsDto> getDetailById(int id) {
         return this.resumeService.getResumeWithDetails(id);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationExeption(MethodArgumentNotValidException exceptions) {
         Map<String, String> validationErrors = new HashMap<String, String>();

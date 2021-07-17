@@ -5,6 +5,7 @@ import melihvarilci.hrms.core.utilities.results.DataResult;
 import melihvarilci.hrms.core.utilities.results.Result;
 import melihvarilci.hrms.entities.concretes.JobAdvertisement;
 import melihvarilci.hrms.entities.dtos.JobAdvertisementForAddDto;
+import melihvarilci.hrms.entities.dtos.JobAdvertisementWithPagingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,16 @@ public class JobAdvertisementsController {
     @GetMapping("/getallactiveandapproved")
     public DataResult<List<JobAdvertisement>> getAllActiveAndApproved() {
         return this.jobAdvertisementService.findByIsActiveTrueAndIsApprovedTrue();
+    }
+
+    @GetMapping("/getallwithpaging")
+    public DataResult<JobAdvertisementWithPagingDto> getAllWithPaging(@RequestParam int page, @RequestParam int size) {
+        return this.jobAdvertisementService.findByIsActiveTrueAndIsApprovedTruePageable(page - 1, size);
+    }
+
+    @GetMapping("/getuserfavorites")
+    public DataResult<List<JobAdvertisement>> getUserFavorites(int userId) {
+        return this.jobAdvertisementService.findByUserFavorites(userId);
     }
 
     @PutMapping("/changestatus")

@@ -1,10 +1,12 @@
 package melihvarilci.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -20,4 +22,7 @@ public class School {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "school")
+    @JsonIgnore
+    Set<SchoolDepartment> schoolDepartments;
 }

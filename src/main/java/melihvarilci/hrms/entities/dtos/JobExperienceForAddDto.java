@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -21,7 +22,7 @@ public class JobExperienceForAddDto {
     private String position;
 
     @NotNull
-    private Date startDate;
+    private LocalDate startDate;
 
     private Date endDate;
 }

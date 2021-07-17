@@ -5,9 +5,13 @@ import melihvarilci.hrms.entities.dtos.ResumeWithDetailsDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface ResumeDao extends JpaRepository<Resume, Integer> {
     @Query("Select new melihvarilci.hrms.entities.dtos.ResumeWithDetailsDto" +
             " (r.id, r.githubAddress, r.linkedinAddress, r.coverLetter, r.picture, r.createDate, e)" +
             " From Resume r Join r.employee e Where r.id =:id")
     ResumeWithDetailsDto getResumeWithDetailsById(int id);
+
+    List<Resume> getAllByEmployee_user_id(int id);
 }

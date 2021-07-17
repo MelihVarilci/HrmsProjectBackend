@@ -6,11 +6,14 @@ import melihvarilci.hrms.business.abstracts.JobAdvertisementService;
 import melihvarilci.hrms.business.abstracts.JobPositionService;
 import melihvarilci.hrms.core.utilities.business.BusinessRules;
 import melihvarilci.hrms.core.utilities.results.*;
-import melihvarilci.hrms.dataAccess.abstracts.EmployerDao;
 import melihvarilci.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import melihvarilci.hrms.entities.concretes.JobAdvertisement;
 import melihvarilci.hrms.entities.dtos.JobAdvertisementForAddDto;
+import melihvarilci.hrms.entities.dtos.JobAdvertisementWithPagingDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -37,6 +40,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
+    public DataResult<JobAdvertisement> findById(int id) {
+        return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.getOne(id));
+    }
+
+    @Override
     public DataResult<List<JobAdvertisement>> findByIsActiveTrue() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrue());
     }
@@ -54,6 +62,20 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     @Override
     public DataResult<List<JobAdvertisement>> findByIsActiveTrueAndIsApprovedTrue() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueAndIsApprovedTrue());
+    }
+
+    @Override
+    public DataResult<JobAdvertisementWithPagingDto> findByIsActiveTrueAndIsApprovedTruePageable(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<JobAdvertisement> result = this.jobAdvertisementDao.findByIsActiveTrueAndIsApprovedTrue(pageable);
+        JobAdvertisementWithPagingDto jobAdvertisementWithPagingDto = new JobAdvertisementWithPagingDto(result.getContent(), result.getTotalPages());
+
+        return new SuccessDataResult<JobAdvertisementWithPagingDto>(jobAdvertisementWithPagingDto);
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> findByUserFavorites(int userId) {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findUserFavoriteJobAds(userId));
     }
 
     @Override
