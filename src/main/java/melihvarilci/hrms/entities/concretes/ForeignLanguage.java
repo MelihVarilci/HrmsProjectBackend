@@ -11,9 +11,9 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "foreign_languages")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "foreign_languages")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "resumeForeignLanguages"})
 public class ForeignLanguage {
     @Id

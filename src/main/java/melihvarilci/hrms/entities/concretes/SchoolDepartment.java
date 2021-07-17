@@ -10,9 +10,9 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "school_departments")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "school_departments")
 public class SchoolDepartment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

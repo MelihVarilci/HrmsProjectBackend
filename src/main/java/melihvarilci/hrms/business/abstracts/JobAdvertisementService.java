@@ -16,6 +16,8 @@ public interface JobAdvertisementService {
 
     DataResult<List<JobAdvertisement>> finfByIsActiveTrueAndEmployer_Id(int employerId);
 
+    DataResult<List<JobAdvertisement>> findByIsActiveTrueAndIsApprovedTrue();
+
     Result addNew(JobAdvertisementForAddDto jobAdvertisementForAddDto);
 
     Result changeStatus(int jobadvertisementId, int employerId);

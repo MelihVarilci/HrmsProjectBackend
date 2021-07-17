@@ -9,9 +9,9 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "employee_school_departments")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "employee_school_departments")
 public class EmployeeSchoolDepartment {
     @Id
     @Column(name = "id")

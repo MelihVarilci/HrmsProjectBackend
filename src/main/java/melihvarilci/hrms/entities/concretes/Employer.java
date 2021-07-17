@@ -31,6 +31,9 @@ public class Employer {
     @Column(name = "website")
     private String website;
 
+    @Column(name = "avatar_path")
+    private String avatarPath;
+
     @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
     private List<JobAdvertisement> jobAdvertisements;
 

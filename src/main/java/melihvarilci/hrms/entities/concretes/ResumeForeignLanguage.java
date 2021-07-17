@@ -8,9 +8,9 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "resume_foreign_languages")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "resume_foreign_languages")
 public class ResumeForeignLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

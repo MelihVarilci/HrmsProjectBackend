@@ -52,6 +52,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
+    public DataResult<List<JobAdvertisement>> findByIsActiveTrueAndIsApprovedTrue() {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueAndIsApprovedTrue());
+    }
+
+    @Override
     public Result addNew(JobAdvertisementForAddDto jobAdvertisement) {
         Result businessRules = BusinessRules.run(
                 isJobPositionValid(jobAdvertisement.getJobPositionId()),

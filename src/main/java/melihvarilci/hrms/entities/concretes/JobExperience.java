@@ -10,9 +10,9 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "job_experience")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "job_experience")
 public class JobExperience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

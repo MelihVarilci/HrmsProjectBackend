@@ -41,6 +41,11 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.finfByIsActiveTrueAndEmployer_Id(employerId);
     }
 
+    @GetMapping("/getallactiveandapproved")
+    public DataResult<List<JobAdvertisement>> getAllActiveAndApproved() {
+        return this.jobAdvertisementService.findByIsActiveTrueAndIsApprovedTrue();
+    }
+
     @PutMapping("/changestatus")
     public Result changeStatus(int jobadvertisementId, int employerId) {
         return this.jobAdvertisementService.changeStatus(jobadvertisementId, employerId);

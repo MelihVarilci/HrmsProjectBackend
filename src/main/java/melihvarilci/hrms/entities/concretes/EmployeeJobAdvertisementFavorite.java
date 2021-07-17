@@ -1,28 +1,27 @@
 package melihvarilci.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "skills")
-public class Skill {
+@Table(name = "employee_job_advertisement_favorites")
+public class EmployeeJobAdvertisementFavorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
-    @OneToMany(mappedBy = "skill")
-    @JsonIgnore()
-    Set<ResumeSkill> resumeSkills;
+    @ManyToOne
+    @JoinColumn(name = "jobadvertisement_id")
+    private JobAdvertisement jobAdvertisement;
 }

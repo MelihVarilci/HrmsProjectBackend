@@ -11,9 +11,9 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "resumes")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "resumes")
 public class Resume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

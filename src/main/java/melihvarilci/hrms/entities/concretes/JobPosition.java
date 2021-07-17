@@ -10,9 +10,9 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "job_positions")
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "job_positions")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
 public class JobPosition {
     @Id

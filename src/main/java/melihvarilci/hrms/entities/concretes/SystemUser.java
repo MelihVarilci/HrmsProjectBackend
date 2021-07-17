@@ -11,9 +11,9 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "system_users")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "system_users")
 public class SystemUser {
     @Id
     @Column(name = "user_id")

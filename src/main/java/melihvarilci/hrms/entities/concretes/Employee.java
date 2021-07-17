@@ -11,9 +11,9 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "employees")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "employees")
 public class Employee {
     @Id
     @Column(name = "id", nullable = false)
@@ -42,6 +42,10 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     Set<Resume> resumes;
+
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    Set<EmployeeJobAdvertisementFavorite> employeeJobAdvertisementFavorites;
 
     public Employee(int id, String firstName, String lastName, String nationalityId, Date birthOfDate) {
         this.id = id;

@@ -9,13 +9,13 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "job_advertisements")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "job_advertisements")
 public class JobAdvertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private int id;
 
     @Column(name = "job_description", nullable = false)
@@ -39,6 +39,9 @@ public class JobAdvertisement {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
+    @Column(name = "is_approved", nullable = false)
+    private boolean isApproved;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "city_id")
     private City city;
@@ -50,6 +53,14 @@ public class JobAdvertisement {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "employer_id")
     private Employer employer;
+
+    @ManyToOne()
+    @JoinColumn(name = "workingtype_id")
+    private JobAdvertisementWorkingType workingType;
+
+    @ManyToOne()
+    @JoinColumn(name = "workingtime_id")
+    private JobAdvertisementWorkingTime workingTime;
 
     public JobAdvertisement(String jobDescription, Double minSalary, Double maxSalary, int openPositionCount,
                             Date lastApplyDate, Date createDate, boolean isActive) {
